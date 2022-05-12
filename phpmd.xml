@@ -8,7 +8,7 @@
                      http://pmd.sf.net/ruleset_xml_schema.xsd"
 >
     <description>
-        fachowy-warsztat.pl ruleset
+        rss reader ruleset
     </description>
 
     <!--    Waiting for support PHP8 constructor support -->
