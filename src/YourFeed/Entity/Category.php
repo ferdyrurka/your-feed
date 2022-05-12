@@ -1,9 +1,10 @@
 <?php
 
-namespace Ferdyrurka\RssReader\Entity;
+namespace Ferdyrurka\YourFeed\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ferdyrurka\RssReader\Repository\CategoryRepository;
+use Ferdyrurka\YourFeed\Helper\Slugger;
+use Ferdyrurka\YourFeed\Repository\CategoryRepository;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -11,15 +12,15 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private ?string $name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $slug;
+    private ?string $slug;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -29,21 +30,13 @@ class Category
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+        if ($name) {
+            $this->slug = Slugger::slug($name);
+        }
 
         return $this;
     }

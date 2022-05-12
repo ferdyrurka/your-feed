@@ -1,5 +1,5 @@
 controllers:
-    resource: ../src/Controller/
+    resource: ../src/YourFeed/Controller/
     type: annotation
 
 kernel:

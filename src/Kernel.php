@@ -1,6 +1,6 @@
 <?php
 
-namespace Ferdyrurka\RssReader;
+namespace Ferdyrurka;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
