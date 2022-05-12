@@ -2,6 +2,7 @@
 
 namespace Ferdyrurka\YourFeed\Controller\Admin;
 
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Ferdyrurka\YourFeed\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -12,14 +13,11 @@ class CategoryCrudController extends AbstractCrudController
         return Category::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name'),
+            TextField::new('slug')->setFormTypeOption('disabled','disabled'),
         ];
     }
-    */
 }

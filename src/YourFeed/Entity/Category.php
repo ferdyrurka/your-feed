@@ -18,7 +18,7 @@ class Category
     private ?string $name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $slug;
+    private string $slug;
 
     public function getId(): int
     {
@@ -39,5 +39,10 @@ class Category
         }
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
