@@ -79,6 +79,17 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.42"
+        "fakerphp/faker": "^1.19",
+        "infection/infection": "^0.26.10",
+        "mockery/mockery": "^1.5",
+        "phpmd/phpmd": "^2.12",
+        "phpstan/phpstan": "^1.6",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6",
+        "symfony/debug-bundle": "6.0.*",
+        "symfony/maker-bundle": "^1.42",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*"
     }
 }
