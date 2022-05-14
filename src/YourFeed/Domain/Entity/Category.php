@@ -1,11 +1,11 @@
 <?php
 
-namespace Ferdyrurka\YourFeed\Entity;
+namespace Ferdyrurka\YourFeed\Domain\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Ferdyrurka\YourFeed\Helper\Slugger;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\CategoryRepository;
+use Ferdyrurka\YourFeed\Infrastructure\Slugger\Slugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]

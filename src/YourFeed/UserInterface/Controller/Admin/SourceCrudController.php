@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Controller\Admin;
+namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
-use Ferdyrurka\YourFeed\Entity\Source;
-use Ferdyrurka\YourFeed\Enum\Period;
+use Ferdyrurka\YourFeed\Domain\Entity\Source;
+use Ferdyrurka\YourFeed\Domain\Enum\Period;
 use Ferdyrurka\YourFeed\Infrastructure\EasyAdmin\EnumField;
 
 class SourceCrudController extends AbstractCrudController

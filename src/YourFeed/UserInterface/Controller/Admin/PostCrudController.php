@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Controller\Admin;
+namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -12,7 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
-use Ferdyrurka\YourFeed\Entity\Post;
+use Ferdyrurka\YourFeed\Domain\Entity\Post;
 
 class PostCrudController extends AbstractCrudController
 {

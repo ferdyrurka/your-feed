@@ -1,10 +1,10 @@
 <?php
 
-namespace Ferdyrurka\YourFeed\Controller\Admin;
+namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Ferdyrurka\YourFeed\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Ferdyrurka\YourFeed\Domain\Entity\Category;
 
 class CategoryCrudController extends AbstractCrudController
 {

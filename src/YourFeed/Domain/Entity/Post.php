@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Entity;
+namespace Ferdyrurka\YourFeed\Domain\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Ferdyrurka\YourFeed\Helper\Slugger;
-use Ferdyrurka\YourFeed\Service\Post\Checksum;
+use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
+use Ferdyrurka\YourFeed\Infrastructure\Slugger\Slugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]

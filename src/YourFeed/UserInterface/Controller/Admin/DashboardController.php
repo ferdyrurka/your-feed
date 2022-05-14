@@ -1,16 +1,13 @@
 <?php
 
-namespace Ferdyrurka\YourFeed\Controller\Admin;
+namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Ferdyrurka\YourFeed\Entity\Category;
-use Ferdyrurka\YourFeed\Entity\Post;
-use Ferdyrurka\YourFeed\Entity\Source;
+use Ferdyrurka\YourFeed\Domain\Entity\Category;
+use Ferdyrurka\YourFeed\Domain\Entity\Post;
+use Ferdyrurka\YourFeed\Domain\Entity\Source;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

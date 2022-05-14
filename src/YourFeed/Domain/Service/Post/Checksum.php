@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Service\Post;
+namespace Ferdyrurka\YourFeed\Domain\Service\Post;
 
 final class Checksum
 {

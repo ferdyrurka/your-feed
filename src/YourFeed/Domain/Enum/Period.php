@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Enum;
+namespace Ferdyrurka\YourFeed\Domain\Enum;
 
 enum Period: string
 {

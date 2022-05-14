@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Entity;
+namespace Ferdyrurka\YourFeed\Domain\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Ferdyrurka\YourFeed\Enum\Period;
+use Ferdyrurka\YourFeed\Domain\Enum\Period;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]

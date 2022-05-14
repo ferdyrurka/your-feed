@@ -4,7 +4,7 @@ namespace Ferdyrurka\YourFeed\Infrastructure\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Ferdyrurka\YourFeed\Entity\Category;
+use Ferdyrurka\YourFeed\Domain\Entity\Category;
 
 /**
  * @extends ServiceEntityRepository<Category>
