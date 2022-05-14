@@ -4,9 +4,8 @@ namespace Ferdyrurka\YourFeed\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Helper\Slugger;
-use Ferdyrurka\YourFeed\Repository\CategoryRepository;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Entity]
 class Category
 {
     #[ORM\Id]
