@@ -7,7 +7,6 @@ namespace Ferdyrurka\YourFeed\Domain\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
-use Ferdyrurka\YourFeed\Domain\Service\Slugger\Slugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
@@ -51,11 +50,11 @@ class Post
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(string $title, string $description, string $url, DateTimeImmutable $publicationDate)
+    public function __construct(string $title, string $description, string $url, string $slug, DateTimeImmutable $publicationDate)
     {
         $this->title = $title;
         $this->description = $description;
-        $this->slug = Slugger::slug($url);
+        $this->slug = $slug;
 
         $this->url = $url;
 

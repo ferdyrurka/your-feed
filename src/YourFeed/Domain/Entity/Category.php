@@ -4,7 +4,6 @@ namespace Ferdyrurka\YourFeed\Domain\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Ferdyrurka\YourFeed\Domain\Service\Slugger\Slugger;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\CategoryRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,16 +45,17 @@ class Category
     {
         $this->name = $name;
 
-        if ($name) {
-            $this->slug = Slugger::slug($name);
-        }
-
         return $this;
     }
 
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function __toString(): string

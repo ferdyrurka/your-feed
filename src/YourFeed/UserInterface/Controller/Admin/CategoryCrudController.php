@@ -3,6 +3,7 @@
 namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Ferdyrurka\YourFeed\Domain\Entity\Category;
 
@@ -17,7 +18,7 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            TextField::new('slug')->setFormTypeOption('disabled','disabled'),
+            SlugField::new('slug')->setTargetFieldName('name'),
         ];
     }
 }
