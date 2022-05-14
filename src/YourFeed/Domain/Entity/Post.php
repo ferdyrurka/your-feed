@@ -7,7 +7,7 @@ namespace Ferdyrurka\YourFeed\Domain\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
-use Ferdyrurka\YourFeed\Infrastructure\Slugger\Slugger;
+use Ferdyrurka\YourFeed\Domain\Service\Slugger\Slugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]

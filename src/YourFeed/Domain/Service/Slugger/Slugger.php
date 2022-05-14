@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Infrastructure\Slugger;
+namespace Ferdyrurka\YourFeed\Domain\Service\Slugger;
 
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
