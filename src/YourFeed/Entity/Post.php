@@ -8,7 +8,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Helper\Slugger;
 use Ferdyrurka\YourFeed\Service\Post\Checksum;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 class Post
@@ -19,15 +19,24 @@ class Post
     private int $id;
 
     #[ORM\Column(type: 'string', length: 512)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 512)]
     private string $title;
 
     #[ORM\Column(type: 'string', length: 512)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 512)]
     private string $slug;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 2048)]
     private string $description;
 
     #[ORM\Column(type: 'string', length: 512)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 512)]
+    #[Assert\Url]
     private string $url;
 
     #[ORM\Column(type: 'string', length: 40)]
@@ -44,21 +53,15 @@ class Post
 
     public function __construct(string $title, string $description, string $url, DateTimeImmutable $publicationDate)
     {
-        Assert::notEmpty($title);
         $this->title = $title;
-
-        Assert::notEmpty($description);
         $this->description = $description;
-
         $this->slug = Slugger::slug($url);
-        Assert::notEmpty($url);
+
         $this->url = $url;
 
         $this->checksum = Checksum::generate($title, $description, $url);
 
-        Assert::notEmpty($publicationDate);
         $this->publicationDate = $publicationDate;
-
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = clone $this->createdAt;
     }

@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Ferdyrurka\YourFeed\Entity\Post;
 
 class PostCrudController extends AbstractCrudController
@@ -25,7 +26,7 @@ class PostCrudController extends AbstractCrudController
         return [
             TextField::new('title'),
             TextField::new('slug'),
-            TextField::new('url'),
+            UrlField::new('url'),
             TextField::new('checksum'),
             TextEditorField::new('description'),
             DateTimeField::new('publicationDate'),

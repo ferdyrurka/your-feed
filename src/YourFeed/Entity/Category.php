@@ -2,10 +2,13 @@
 
 namespace Ferdyrurka\YourFeed\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Helper\Slugger;
+use Ferdyrurka\YourFeed\Infrastructure\Repository\CategoryRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
     #[ORM\Id]
@@ -14,10 +17,20 @@ class Category
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $slug;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): int
     {
@@ -43,5 +56,10 @@ class Category
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

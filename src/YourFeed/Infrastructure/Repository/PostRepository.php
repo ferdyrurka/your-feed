@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Repository;
+namespace Ferdyrurka\YourFeed\Infrastructure\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Ferdyrurka\YourFeed\Entity\Post;
 use Doctrine\Persistence\ManagerRegistry;
+use Ferdyrurka\YourFeed\Entity\Post;
 
 /**
  * @extends ServiceEntityRepository<Post>
