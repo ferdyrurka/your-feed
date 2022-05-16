@@ -27,8 +27,6 @@ class SourceCrudController extends AbstractCrudController
             EnumField::new('period')
                 ->setClass(Period::class),
             AssociationField::new('category')->autocomplete()
-//            DateTimeField::new('updatedAt'),
-//            DateTimeField::new('createdAt'),
         ];
     }
 }
