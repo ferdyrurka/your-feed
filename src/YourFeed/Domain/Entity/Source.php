@@ -36,6 +36,9 @@ class Source
     #[Assert\NotBlank]
     private ?Period $period;
 
+    #[ORM\OneToOne(mappedBy: 'source', targetEntity: Import::class, cascade: ['persist'])]
+    private Import $import;
+
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updatedAt;
 
@@ -46,6 +49,7 @@ class Source
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = clone $this->createdAt;
+        $this->import = new Import($this);
     }
 
     public function getId(): int
