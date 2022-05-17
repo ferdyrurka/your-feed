@@ -1,0 +1,3 @@
+zenstruck_schedule:
+  without_overlapping_lock_factory: lock.default.factory
+  timezone: Europe/Warsaw
