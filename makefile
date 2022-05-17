@@ -20,3 +20,7 @@ ci:
 .PHONE: consumers
 consumers:
 	symfony console messenger:consume async -vv
+
+.PHONE: scheduler
+scheduler:
+	symfony console schedule:run

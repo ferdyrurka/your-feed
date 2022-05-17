@@ -6,8 +6,16 @@ namespace Ferdyrurka\YourFeed\Domain\Enum;
 
 enum Period: string
 {
-    case EVERY_15_MINUTES = 'every_15_minutes';
-    case EVERY_HOUR = 'every_hour';
-    case EVERY_DAY = 'every_day';
-    case EVERY_WEEK = 'every_week';
+    //only for debug, delete after WIP project
+    case EVERY_MINUTE = 'everyMinute';
+
+    case EVERY_FIVE_MINUTES = 'everyFiveMinutes';
+
+    case EVERY_FIFTEEN_MINUTES = 'everyFifteenMinutes';
+
+    case HOURLY = 'hourly';
+
+    case DAILY = 'daily';
+
+    case WEEKLY = 'weekly';
 }
