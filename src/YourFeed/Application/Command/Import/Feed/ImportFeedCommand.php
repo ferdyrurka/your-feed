@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ferdyrurka\YourFeed\Application\Command;
+namespace Ferdyrurka\YourFeed\Application\Command\Import\Feed;
 
 use Ferdyrurka\YourFeed\Domain\Entity\Source;
 
-final class ImportPostCommand
+final class ImportFeedCommand
 {
     public function __construct(private readonly Source $source)
     {

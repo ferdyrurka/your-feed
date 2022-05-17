@@ -22,4 +22,14 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+
+    public function findOneByExternalId(string $externalId): ?Post
+    {
+        return $this->findOneBy(['externalId' => $externalId]);
+    }
+
+    public function save(Post $post): void
+    {
+        $this->_em->persist($post);
+    }
 }

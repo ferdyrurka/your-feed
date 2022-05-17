@@ -2,10 +2,19 @@ framework:
     messenger:
         # failure_transport: failed
 
+        default_bus: command.bus
+
+        buses:
+            command.bus:
+                middleware:
+                    - router_context
+                    - doctrine_transaction
+
+
         transports:
             async: '%env(MESSENGER_TRANSPORT_DSN)%'
 #            failed: 'doctrine://default?queue_name=dead_letter'
             sync: 'sync://'
 
         routing:
-            Ferdyrurka\YourFeed\Application\Command\ImportPostCommand: async
+#            Ferdyrurka\YourFeed\Application\Command\Import\Feed\ImportFeedCommand: async

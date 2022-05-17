@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ferdyrurka\YourFeed\UserInterface\CLI\Command;
 
-use Ferdyrurka\YourFeed\Application\Command\ImportPostCommand;
+use Ferdyrurka\YourFeed\Application\Command\Import\Feed\ImportFeedCommand;
 use Ferdyrurka\YourFeed\Domain\Enum\Period;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\SourceRepository;
 use Symfony\Component\Console\Command\Command;
@@ -36,7 +36,7 @@ class ImportCommand extends Command
         $period = Period::from($input->getOption('period'));
 
         foreach ($this->sourceRepository->findByPeriod($period) as $source) {
-            $this->commandBus->dispatch(new ImportPostCommand($source));
+            $this->commandBus->dispatch(new ImportFeedCommand($source));
         }
 
         return Command::SUCCESS;

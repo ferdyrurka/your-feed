@@ -8,8 +8,10 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Enum\Period;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity]
+#[UniqueEntity(['url', 'name'])]
 class Source
 {
     #[ORM\Id]
@@ -17,12 +19,12 @@ class Source
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 64)]
+    #[ORM\Column(type: 'string', length: 64, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 64)]
     private ?string $name;
 
-    #[ORM\Column(type: 'string', length: 512)]
+    #[ORM\Column(type: 'string', length: 512, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 512)]
     #[Assert\Url]
@@ -109,6 +111,11 @@ class Source
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getImport(): Import
+    {
+        return $this->import;
     }
 
     private function update(): void

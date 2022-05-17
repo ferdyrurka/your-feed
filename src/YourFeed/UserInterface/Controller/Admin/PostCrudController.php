@@ -28,7 +28,7 @@ class PostCrudController extends AbstractCrudController
             TextField::new('slug'),
             UrlField::new('url'),
             TextField::new('checksum'),
-            TextEditorField::new('description'),
+            TextEditorField::new('description')->hideOnIndex(),
             DateTimeField::new('publicationDate'),
             DateTimeField::new('updatedAt'),
             DateTimeField::new('createdAt'),

@@ -8,8 +8,10 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity]
+#[UniqueEntity(['slug', 'url', 'externalId'])]
 class Post
 {
     #[ORM\Id]
@@ -22,7 +24,7 @@ class Post
     #[Assert\Length(max: 512)]
     private string $title;
 
-    #[ORM\Column(type: 'string', length: 512)]
+    #[ORM\Column(type: 'string', length: 512, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 512)]
     private string $slug;
@@ -32,7 +34,7 @@ class Post
     #[Assert\Length(max: 2048)]
     private string $description;
 
-    #[ORM\Column(type: 'string', length: 512)]
+    #[ORM\Column(type: 'string', length: 512, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 512)]
     #[Assert\Url]
@@ -41,8 +43,18 @@ class Post
     #[ORM\Column(type: 'string', length: 40)]
     private string $checksum;
 
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    private string $externalId;
+
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[Assert\NotBlank]
+    private Category $category;
+
     #[ORM\Column(type: 'datetime_immutable')]
-    private DateTimeImmutable $publicationDate;
+    #[Assert\NotBlank]
+    private DateTimeImmutable $publicationAt;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updatedAt;
@@ -50,8 +62,16 @@ class Post
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(string $title, string $description, string $url, string $slug, DateTimeImmutable $publicationDate)
-    {
+    public function __construct(
+        string $externalId,
+        string $title,
+        string $description,
+        string $url,
+        string $slug,
+        Category $category,
+        DateTimeImmutable $publicationDate,
+    ) {
+        $this->externalId = $externalId;
         $this->title = $title;
         $this->description = $description;
         $this->slug = $slug;
@@ -60,9 +80,23 @@ class Post
 
         $this->checksum = Checksum::generate($title, $description, $url);
 
-        $this->publicationDate = $publicationDate;
+        $this->category = $category;
+
+        $this->publicationAt = $publicationDate;
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = clone $this->createdAt;
+    }
+
+    public function update(string $title, string $description, string $url, string $slug): void
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->slug = $slug;
+
+        $this->url = $url;
+
+        $this->checksum = Checksum::generate($title, $description, $url);
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): int
@@ -95,9 +129,9 @@ class Post
         return $this->checksum;
     }
 
-    public function getPublicationDate(): DateTimeImmutable
+    public function getPublicationAt(): DateTimeImmutable
     {
-        return $this->publicationDate;
+        return $this->publicationAt;
     }
 
     public function getUpdatedAt(): DateTimeImmutable
@@ -105,8 +139,18 @@ class Post
         return $this->updatedAt;
     }
 
+    public function getExternalId(): string
+    {
+        return $this->externalId;
+    }
+
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getCategory(): Category
+    {
+        return $this->category;
     }
 }

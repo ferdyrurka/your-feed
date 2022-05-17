@@ -7,6 +7,7 @@ namespace Ferdyrurka\YourFeed\Domain\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
+//todo: move to source log
 #[ORM\Entity]
 class SourceLog
 {

@@ -1,14 +1,26 @@
 # RSS reader
 
-The small project aims to simplify being up-to-date with posts etc.
-
-## Requirements
-
-TBD
+The small POC to simplify being up-to-date with posts, news etc.
 
 ## Run
 
-TBD
+Run locally project 
+
+```shell
+make run
+```
+
+Run scheduler
+
+```shell
+make scheduller
+```
+
+Run CI
+
+```shell
+make ci
+```
 
 ## Deploy
 

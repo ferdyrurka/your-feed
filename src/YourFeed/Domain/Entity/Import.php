@@ -31,4 +31,9 @@ class Import
     {
         $this->lastImportedAt = new DateTimeImmutable();
     }
+
+    public function getLastImportedAt(): DateTimeImmutable
+    {
+        return $this->lastImportedAt;
+    }
 }
