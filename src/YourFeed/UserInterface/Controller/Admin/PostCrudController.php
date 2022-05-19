@@ -27,9 +27,14 @@ class PostCrudController extends AbstractCrudController
             TextField::new('title'),
             TextField::new('slug'),
             UrlField::new('url'),
-            TextField::new('checksum'),
-            TextEditorField::new('description')->hideOnIndex(),
-            DateTimeField::new('publicationDate'),
+            TextField::new('checksum')->hideOnIndex(),
+            TextField::new('externalId')->hideOnIndex(),
+            TextField::new('category'),
+            TextEditorField::new('description')
+                ->hideOnIndex()
+                ->setTemplatePath('easyadmin/crud/field/post_description.html.twig')
+            ,
+            DateTimeField::new('publicationAt'),
             DateTimeField::new('updatedAt'),
             DateTimeField::new('createdAt'),
         ];

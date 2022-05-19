@@ -9,5 +9,6 @@ services:
         resource: '../src/'
         exclude:
             - '../src/YourFeed/Domain/Entity/'
+            - '../src/YourFeed/Domain/Exception/'
             - '../src/YourFeed/Application/Command/'
             - '../src/Kernel.php'
