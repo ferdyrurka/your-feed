@@ -15,6 +15,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/YourFeed/Domain/Entity'
                 prefix: 'Ferdyrurka\YourFeed\Domain\Entity'
                 alias: YourFeed
+            SourceLog:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/YourFeed/Infrastructure/SourceLog/Entity'
+                prefix: 'Ferdyrurka\YourFeed\Infrastructure\SourceLog\Entity'
+                alias: SourceLog
 
 when@test:
     doctrine:

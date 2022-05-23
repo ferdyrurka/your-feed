@@ -10,6 +10,7 @@ use Ferdyrurka\YourFeed\Application\Command\Post\UpdatePostCommand;
 use Ferdyrurka\YourFeed\Domain\Entity\Post;
 use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
 use Ferdyrurka\YourFeed\Domain\Specification\ImportPostSpecification;
+use Ferdyrurka\YourFeed\Infrastructure\Purifier\PostPurifier;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\PostRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -18,7 +19,8 @@ final class ImportPostCommandHandler implements MessageHandlerInterface
 {
     public function __construct(
         private readonly PostRepository $postRepository,
-        private readonly MessageBusInterface $commandBus
+        private readonly MessageBusInterface $commandBus,
+        private readonly PostPurifier $postPurifier,
     ) {
     }
 
@@ -34,11 +36,14 @@ final class ImportPostCommandHandler implements MessageHandlerInterface
             return;
         }
 
+        $title = $this->postPurifier->pureTitle($command->getTitle());
+        $description = $this->postPurifier->pureDescription($command->getDescription());
+
         if ($post instanceof Post) {
             $this->commandBus->dispatch(new UpdatePostCommand(
                 $post,
-                $command->getTitle(),
-                $command->getDescription(),
+                $title,
+                $description,
                 $command->getUrl(),
             ));
 
@@ -47,8 +52,8 @@ final class ImportPostCommandHandler implements MessageHandlerInterface
 
         $this->commandBus->dispatch(new CreatePostCommand(
             $command->getId(),
-            $command->getTitle(),
-            $command->getDescription(),
+            $title,
+            $description,
             $command->getUrl(),
             $command->getSource()->getCategory(),
             $command->getPublicationDate(),

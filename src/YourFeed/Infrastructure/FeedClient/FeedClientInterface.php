@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ferdyrurka\YourFeed\Infrastructure\FeedClient;
 
+use Ferdyrurka\YourFeed\Domain\Entity\Source;
+
 interface FeedClientInterface
 {
-    public function get(string $url): Feed;
+    public function get(Source $source): Feed;
 }

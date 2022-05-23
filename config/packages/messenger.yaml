@@ -17,4 +17,4 @@ framework:
             sync: 'sync://'
 
         routing:
-            Ferdyrurka\YourFeed\Application\Command\Import\Feed\ImportFeedCommand: async
+#            Ferdyrurka\YourFeed\Application\Command\Import\Feed\ImportFeedCommand: async

@@ -32,9 +32,7 @@ final class ImportFeedCommandHandler implements MessageHandlerInterface
         $source = $command->getSource();
         $import = $source->getImport();
 
-        $response = $this->feedClient->get(
-            $command->getSource()->getUrl(),
-        );
+        $response = $this->feedClient->get($source);
 
         $specification = new ImportSpecification($import->getLastImportedAt());
 

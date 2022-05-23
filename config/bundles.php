@@ -12,4 +12,5 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     Zenstruck\ScheduleBundle\ZenstruckScheduleBundle::class => ['all' => true],
+    Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle::class => ['all' => true]
 ];

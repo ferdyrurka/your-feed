@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.12",
         "easycorp/easyadmin-bundle": "^4.1",
         "exercise/htmlpurifier-bundle": "^4.0",
+        "laminas/laminas-feed": "^2.17",
         "symfony/amqp-messenger": "6.0.*",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
