@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ferdyrurka\YourFeed\Infrastructure\FeedClient;
 
+use Exception;
 use Ferdyrurka\YourFeed\Domain\Entity\Source;
 use Ferdyrurka\YourFeed\Infrastructure\SourceLog\SourceLoggerInterface;
 use Laminas\Feed\Reader\Reader;
@@ -20,12 +21,20 @@ class Client implements FeedClientInterface
 
     public function get(Source $source): Feed
     {
-        $response = $this->httpClient->request(
-            'GET',
-            $source->getUrl()
-        );
+        try {
+            $this->sourceLogger->request($source, $source->getUrl());
 
-        $this->sourceLogger->response($source, $response->getContent());
+            $response = $this->httpClient->request(
+                'GET',
+                $source->getUrl()
+            );
+        } catch (Exception $exception) {
+            $this->sourceLogger->error($source, $exception);
+
+            throw $exception;
+        }
+
+        $this->sourceLogger->response($source, $response);
 
         $feed = Reader::importString($response->getContent());
 
