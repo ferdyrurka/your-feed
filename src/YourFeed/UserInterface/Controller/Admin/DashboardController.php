@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Ferdyrurka\YourFeed\Domain\Entity\Category;
 use Ferdyrurka\YourFeed\Domain\Entity\Post;
 use Ferdyrurka\YourFeed\Domain\Entity\Source;
+use Ferdyrurka\YourFeed\Infrastructure\SourceLog\Entity\SourceLog;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,5 +32,6 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Categories', 'fa fa-book', Category::class);
          yield MenuItem::linkToCrud('Posts', 'fa fa-signs-post', Post::class);
          yield MenuItem::linkToCrud('Source', 'fa fa-book', Source::class);
+         yield MenuItem::linkToCrud('Source log', 'fa fa-book', SourceLog::class);
     }
 }

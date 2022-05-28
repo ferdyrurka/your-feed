@@ -36,4 +36,29 @@ class SourceLog
         $this->source = $source;
         $this->createdAt = (new DateTimeImmutable())->getTimestamp();
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getLog(): array
+    {
+        return $this->log;
+    }
+
+    public function getLevel(): Level
+    {
+        return $this->level;
+    }
+
+    public function getSource(): Source
+    {
+        return $this->source;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return (new DateTimeImmutable())->setTimestamp($this->createdAt);
+    }
 }
