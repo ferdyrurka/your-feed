@@ -8,6 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Ferdyrurka\YourFeed\Domain\Entity\Source;
 use Ferdyrurka\YourFeed\Domain\Enum\Period;
+use Ferdyrurka\YourFeed\Domain\Exception\ObjectNotFoundException;
 
 /**
  * @extends ServiceEntityRepository<Source>
@@ -27,5 +28,16 @@ class SourceRepository extends ServiceEntityRepository
     public function findByPeriod(Period $period): array
     {
         return $this->findBy(['period' => $period->value]);
+    }
+
+    public function get(int $id): Source
+    {
+        $source = $this->find($id);
+
+        if (!$source instanceof Source) {
+            throw new ObjectNotFoundException();
+        }
+
+        return $source;
     }
 }

@@ -36,7 +36,7 @@ class ImportCommand extends Command
         $period = Period::from($input->getOption('period'));
 
         foreach ($this->sourceRepository->findByPeriod($period) as $source) {
-            $this->commandBus->dispatch(new ImportFeedCommand($source));
+            $this->commandBus->dispatch(new ImportFeedCommand($source->getId()));
         }
 
         return Command::SUCCESS;

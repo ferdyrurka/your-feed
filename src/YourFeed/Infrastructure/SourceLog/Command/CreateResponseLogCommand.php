@@ -4,30 +4,29 @@ declare(strict_types=1);
 
 namespace Ferdyrurka\YourFeed\Infrastructure\SourceLog\Command;
 
-use Ferdyrurka\YourFeed\Domain\Entity\Source;
-use Ferdyrurka\YourFeed\Infrastructure\SourceLog\Enum\Level;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 final class CreateResponseLogCommand
 {
     public function __construct(
-        private readonly Source $source,
-        private readonly ResponseInterface $response,
+        private readonly int $sourceId,
+        private readonly string $content,
+        private readonly int $statusCode,
     ) {
     }
 
-    public function getSource(): Source
+    public function getSourceId(): int
     {
-        return $this->source;
+        return $this->sourceId;
     }
 
-    public function getResponse(): ResponseInterface
+    public function getContent(): string
     {
-        return $this->response;
+        return $this->content;
     }
 
-    public function getLevel(): Level
+    public function getStatusCode(): int
     {
-        return Level::RESPONSE;
+        return $this->statusCode;
     }
 }

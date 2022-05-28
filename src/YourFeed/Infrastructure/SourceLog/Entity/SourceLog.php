@@ -17,11 +17,11 @@ class SourceLog
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'text')]
-    private string $log;
+    #[ORM\Column(type: 'json')]
+    private array $log;
 
     #[ORM\Column(type: 'string', enumType: Level::class)]
-    private string $level;
+    private Level $level;
 
     #[ORM\ManyToOne(targetEntity: Source::class)]
     private Source $source;
@@ -29,7 +29,7 @@ class SourceLog
     #[ORM\Column(type: 'integer')]
     private int $createdAt;
 
-    public function __construct(string $log, string $level, Source $source)
+    public function __construct(array $log, Level $level, Source $source)
     {
         $this->log = $log;
         $this->level = $level;

@@ -22,15 +22,16 @@ class SourceLogger implements SourceLoggerInterface
     public function response(Source $source, ResponseInterface $response): void
     {
         $this->commandBus->dispatch(new CreateResponseLogCommand(
-            $source,
-            $response,
+            $source->getId(),
+            $response->getContent(),
+            $response->getStatusCode(),
         ));
     }
 
     public function request(Source $source, Stringable|string $url): void
     {
         $this->commandBus->dispatch(new CreateRequestLogCommand(
-            $source,
+            $source->getId(),
             $url,
         ));
     }
@@ -38,7 +39,7 @@ class SourceLogger implements SourceLoggerInterface
     public function error(Source $source, Exception|Stringable|string $message): void
     {
         $this->commandBus->dispatch(new CreateErrorLogCommand(
-            $source,
+            $source->getId(),
             $message,
         ));
     }

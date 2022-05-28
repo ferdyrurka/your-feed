@@ -12,6 +12,7 @@ use Ferdyrurka\YourFeed\Domain\Specification\ImportSpecification;
 use Ferdyrurka\YourFeed\Infrastructure\FeedClient\FeedClientInterface;
 use Ferdyrurka\YourFeed\Infrastructure\FeedClient\Post;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\ImportRepository;
+use Ferdyrurka\YourFeed\Infrastructure\Repository\SourceRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class ImportFeedCommandHandler implements MessageHandlerInterface
 {
     public function __construct(
+        private readonly SourceRepository $sourceRepository,
         private readonly FeedClientInterface $feedClient,
         private readonly ImportRepository $importRepository,
         private readonly MessageBusInterface $commandBus,
@@ -29,7 +31,7 @@ final class ImportFeedCommandHandler implements MessageHandlerInterface
 
     public function __invoke(ImportFeedCommand $command): void
     {
-        $source = $command->getSource();
+        $source = $this->sourceRepository->get($command->getSourceId());
         $import = $source->getImport();
 
         $response = $this->feedClient->get($source);
@@ -41,7 +43,7 @@ final class ImportFeedCommandHandler implements MessageHandlerInterface
         }
 
         $this->importPosts($response->getPosts(), $source);
-        
+
         $import->successImport();
         $this->importRepository->save($import);
     }
