@@ -1,4 +1,7 @@
 {
+    "algolia/algoliasearch-client-php": {
+        "version": "3.2.0"
+    },
     "composer/pcre": {
         "version": "3.0.0"
     },
@@ -217,7 +220,13 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
+        "version": "3.0.0"
+    },
+    "psr/simple-cache": {
         "version": "3.0.0"
     },
     "sanmai/later": {

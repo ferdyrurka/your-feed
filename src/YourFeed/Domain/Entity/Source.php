@@ -30,6 +30,10 @@ class Source
     #[Assert\Url]
     private ?string $url;
 
+    #[ORM\Column(type: 'boolean')]
+    #[Assert\NotBlank]
+    private bool $searchable;
+
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[Assert\NotBlank]
     private ?Category $category;
@@ -118,13 +122,23 @@ class Source
         return $this->import;
     }
 
-    private function update(): void
+    public function isSearchable(): bool
     {
-        $this->updatedAt = new DateTimeImmutable();
+        return $this->searchable;
+    }
+
+    public function setSearchable(bool $searchable): void
+    {
+        $this->searchable = $searchable;
     }
 
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    private function update(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
     }
 }
