@@ -12,16 +12,18 @@ use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
 use Ferdyrurka\YourFeed\Domain\Specification\ImportPostSpecification;
 use Ferdyrurka\YourFeed\Infrastructure\Purifier\PostPurifier;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\PostRepository;
+use Ferdyrurka\YourFeed\Infrastructure\Symfony\Messenger\ChainHandlerAbstract;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ImportPostCommandHandler implements MessageHandlerInterface
+final class ImportPostCommandHandler extends ChainHandlerAbstract implements MessageHandlerInterface
 {
     public function __construct(
         private readonly PostRepository $postRepository,
-        private readonly MessageBusInterface $commandBus,
         private readonly PostPurifier $postPurifier,
+        readonly MessageBusInterface $commandBus,
     ) {
+        parent::__construct($commandBus);
     }
 
     public function __invoke(ImportPostCommand $command): void
@@ -30,27 +32,25 @@ final class ImportPostCommandHandler implements MessageHandlerInterface
 
         $checksum = Checksum::generate($command->getTitle(), $command->getDescription(), $command->getUrl());
 
-        $specification = new ImportPostSpecification($post);
-
-        if (!$specification->isImport($checksum)) {
+        if (!(new ImportPostSpecification($post))->isImport($checksum)) {
             return;
         }
 
+        $this->import($post, $command);
+    }
+
+    private function import(?Post $post, ImportPostCommand $command): void
+    {
         $title = $this->postPurifier->pureTitle($command->getTitle());
         $description = $this->postPurifier->pureDescription($command->getDescription());
 
         if ($post instanceof Post) {
-            $this->commandBus->dispatch(new UpdatePostCommand(
-                $post,
-                $title,
-                $description,
-                $command->getUrl(),
-            ));
+            $this->next(new UpdatePostCommand($post, $title, $description, $command->getUrl()));
 
             return;
         }
 
-        $this->commandBus->dispatch(new CreatePostCommand(
+        $this->next(new CreatePostCommand(
             $command->getId(),
             $title,
             $description,

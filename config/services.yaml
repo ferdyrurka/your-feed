@@ -12,3 +12,9 @@ services:
             - '../src/YourFeed/Domain/Exception/'
             - '../src/YourFeed/Application/Command/'
             - '../src/Kernel.php'
+
+    Algolia\AlgoliaSearch\SearchClient:
+        factory: ['@Ferdyrurka\YourFeed\Infrastructure\Search\Factory\AlgoliaFactory', 'create']
+        arguments:
+            - '%env(ALGOLIA_APP_ID)%'
+            - '%env(ALGOLIA_API_KEY)%'

@@ -9,16 +9,20 @@ use Ferdyrurka\YourFeed\Domain\Entity\Post;
 use Ferdyrurka\YourFeed\Domain\Exception\InvalidPostException;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\PostRepository;
 use Ferdyrurka\YourFeed\Infrastructure\Slugger\Slugger;
+use Ferdyrurka\YourFeed\Infrastructure\Symfony\Messenger\ChainHandlerAbstract;
 use Ferdyrurka\YourFeed\Infrastructure\Symfony\Validator\ViolationMessageHelper;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class CreatePostCommandHandler implements MessageHandlerInterface
+final class CreatePostCommandHandler extends ChainHandlerAbstract implements MessageHandlerInterface
 {
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly ValidatorInterface $validator,
+        readonly MessageBusInterface $commandBus,
     ) {
+        parent::__construct($commandBus);
     }
 
     public function __invoke(CreatePostCommand $command): void
