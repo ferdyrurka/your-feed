@@ -18,6 +18,7 @@ framework:
 
         routing:
             Ferdyrurka\YourFeed\Application\Command\Import\Feed\ImportFeedCommand: async
+            Ferdyrurka\YourFeed\Application\Command\Search\ExportPostCommand: async
             Ferdyrurka\YourFeed\Infrastructure\SourceLog\Command\CreateErrorLogCommand: async
             Ferdyrurka\YourFeed\Infrastructure\SourceLog\Command\CreateRequestLogCommand: async
             Ferdyrurka\YourFeed\Infrastructure\SourceLog\Command\CreateResponseLogCommand: async
