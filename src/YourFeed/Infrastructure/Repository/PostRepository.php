@@ -28,7 +28,7 @@ class PostRepository extends ServiceEntityRepository
     {
         $post = $this->findOneBy(['uuid' => $uuid]);
 
-        if ($post instanceof Post) {
+        if (!$post instanceof Post) {
             throw new ObjectNotFoundException();
         }
 
