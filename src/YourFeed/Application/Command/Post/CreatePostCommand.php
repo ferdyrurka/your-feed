@@ -6,6 +6,7 @@ namespace Ferdyrurka\YourFeed\Application\Command\Post;
 
 use DateTimeImmutable;
 use Ferdyrurka\YourFeed\Domain\Entity\Category;
+use Ferdyrurka\YourFeed\Domain\Entity\Source;
 
 class CreatePostCommand
 {
@@ -14,7 +15,7 @@ class CreatePostCommand
         private readonly string $title,
         private readonly string $description,
         private readonly string $url,
-        private readonly Category $category,
+        private readonly Source $source,
         private readonly DateTimeImmutable $publicationDate,
     ) {
     }
@@ -39,9 +40,9 @@ class CreatePostCommand
         return $this->url;
     }
 
-    public function getCategory(): Category
+    public function getSource(): Source
     {
-        return $this->category;
+        return $this->source;
     }
 
     public function getPublicationDate(): DateTimeImmutable

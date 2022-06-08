@@ -13,12 +13,23 @@ final class ExportPostCommandHandler implements MessageHandlerInterface
 {
     public function __construct(
         private readonly PostRepository $postRepository,
-        private readonly SearchClientInterface $searchClient,
+        private readonly SearchClientInterface $postSearchClient,
     ) {
     }
 
-    public function __invoke(ExportPostCommand $exportPostCommand): void
+    public function __invoke(ExportPostCommand $command): void
     {
+        $post = $this->postRepository->get($command->getPostUuid());
 
+        if (!$post->isSearchable()) {
+            return;
+        }
+
+        $this->postSearchClient->save([
+            'title' => $post->getTitle(),
+            'description' => $post->getDescription(),
+            'url' => $post->getUrl(),
+            'publicationAt' => $post->getPublicationAt(),
+        ]);
     }
 }

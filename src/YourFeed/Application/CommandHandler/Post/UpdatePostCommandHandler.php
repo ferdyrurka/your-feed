@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ferdyrurka\YourFeed\Application\CommandHandler\Post;
 
 use Ferdyrurka\YourFeed\Application\Command\Post\UpdatePostCommand;
+use Ferdyrurka\YourFeed\Application\Command\Search\ExportPostCommand;
 use Ferdyrurka\YourFeed\Domain\Exception\InvalidPostException;
 use Ferdyrurka\YourFeed\Infrastructure\Repository\PostRepository;
 use Ferdyrurka\YourFeed\Infrastructure\Slugger\Slugger;
@@ -19,7 +20,7 @@ final class UpdatePostCommandHandler extends ChainHandlerAbstract implements Mes
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly ValidatorInterface $validator,
-        readonly MessageBusInterface $commandBus,
+        MessageBusInterface $commandBus,
     ) {
         parent::__construct($commandBus);
     }
@@ -42,5 +43,7 @@ final class UpdatePostCommandHandler extends ChainHandlerAbstract implements Mes
         }
 
         $this->postRepository->save($post);
+
+        $this->next(new ExportPostCommand($post->getUuid()));
     }
 }

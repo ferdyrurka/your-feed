@@ -6,6 +6,7 @@ namespace Ferdyrurka\YourFeed\UserInterface\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Ferdyrurka\YourFeed\Domain\Entity\Source;
@@ -23,6 +24,7 @@ class SourceCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
+            BooleanField::new('searchable'),
             UrlField::new('url'),
             EnumField::new('period')
                 ->setClass(Period::class),

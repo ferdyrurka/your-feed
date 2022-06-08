@@ -7,6 +7,7 @@ namespace Ferdyrurka\YourFeed\Domain\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Service\Post\Checksum;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -18,6 +19,11 @@ class Post
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private int $id;
+
+    #[ORM\Column(type: 'string', length: 36)]
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    private string $uuid;
 
     #[ORM\Column(type: 'string', length: 512)]
     #[Assert\NotBlank]
@@ -48,9 +54,9 @@ class Post
     #[Assert\Length(max: 255)]
     private string $externalId;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Source::class)]
     #[Assert\NotBlank]
-    private Category $category;
+    private Source $source;
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotBlank]
@@ -68,19 +74,20 @@ class Post
         string $description,
         string $url,
         string $slug,
-        Category $category,
+        Source $source,
         DateTimeImmutable $publicationDate,
     ) {
         $this->externalId = $externalId;
         $this->title = $title;
         $this->description = $description;
         $this->slug = $slug;
+        $this->uuid = Uuid::v4()->toRfc4122();
 
         $this->url = $url;
 
         $this->checksum = Checksum::generate($title, $description, $url);
 
-        $this->category = $category;
+        $this->source = $source;
 
         $this->publicationAt = $publicationDate;
         $this->createdAt = new DateTimeImmutable();
@@ -99,9 +106,19 @@ class Post
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    public function isSearchable(): bool
+    {
+        return $this->source->isSearchable();
+    }
+
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
     }
 
     public function getTitle(): string
@@ -149,8 +166,13 @@ class Post
         return $this->createdAt;
     }
 
+    public function getSource(): Source
+    {
+        return $this->source;
+    }
+
     public function getCategory(): Category
     {
-        return $this->category;
+        return $this->source->getCategory();
     }
 }

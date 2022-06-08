@@ -7,6 +7,7 @@ namespace Ferdyrurka\YourFeed\Infrastructure\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Ferdyrurka\YourFeed\Domain\Entity\Post;
+use Ferdyrurka\YourFeed\Domain\Exception\ObjectNotFoundException;
 
 /**
  * @extends ServiceEntityRepository<Post>
@@ -21,6 +22,17 @@ class PostRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
+    }
+
+    public function get(string $uuid): Post
+    {
+        $post = $this->findOneBy(['uuid' => $uuid]);
+
+        if ($post instanceof Post) {
+            throw new ObjectNotFoundException();
+        }
+
+        return $post;
     }
 
     public function findOneByExternalId(string $externalId): ?Post

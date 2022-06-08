@@ -7,12 +7,12 @@ namespace Ferdyrurka\YourFeed\Application\Command\Search;
 class ExportPostCommand
 {
     public function __construct(
-        private readonly int $postId,
+        private readonly string $postUuid,
     ) {
     }
 
-    public function getPostId(): int
+    public function getPostUuid(): string
     {
-        return $this->postId;
+        return $this->postUuid;
     }
 }

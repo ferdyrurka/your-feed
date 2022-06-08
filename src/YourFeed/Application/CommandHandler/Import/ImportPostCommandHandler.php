@@ -21,7 +21,7 @@ final class ImportPostCommandHandler extends ChainHandlerAbstract implements Mes
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly PostPurifier $postPurifier,
-        readonly MessageBusInterface $commandBus,
+        MessageBusInterface $commandBus,
     ) {
         parent::__construct($commandBus);
     }
@@ -55,7 +55,7 @@ final class ImportPostCommandHandler extends ChainHandlerAbstract implements Mes
             $title,
             $description,
             $command->getUrl(),
-            $command->getSource()->getCategory(),
+            $command->getSource(),
             $command->getPublicationDate(),
         ));
     }

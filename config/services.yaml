@@ -18,3 +18,10 @@ services:
         arguments:
             - '%env(ALGOLIA_APP_ID)%'
             - '%env(ALGOLIA_API_KEY)%'
+
+    post.search.client:
+        class: Ferdyrurka\YourFeed\Infrastructure\Search\AlgoliaClient
+        arguments:
+            $indexName: 'post'
+
+    Ferdyrurka\YourFeed\Infrastructure\Search\SearchClientInterface $postSearchClient: '@post.search.client'

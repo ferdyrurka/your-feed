@@ -30,6 +30,8 @@ class PostCrudController extends AbstractCrudController
             TextField::new('checksum')->hideOnIndex(),
             TextField::new('externalId')->hideOnIndex(),
             TextField::new('category'),
+            TextField::new('source'),
+            TextField::new('searchable'),
             TextEditorField::new('description')
                 ->hideOnIndex()
                 ->setTemplatePath('easyadmin/crud/field/post_description.html.twig')
