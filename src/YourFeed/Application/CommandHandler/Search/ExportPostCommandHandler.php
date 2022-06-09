@@ -26,6 +26,7 @@ final class ExportPostCommandHandler implements MessageHandlerInterface
         }
 
         $this->postSearchClient->save([
+            'objectID' => $post->getUuid(),
             'title' => $post->getTitle(),
             'description' => $post->getDescription(),
             'url' => $post->getUrl(),

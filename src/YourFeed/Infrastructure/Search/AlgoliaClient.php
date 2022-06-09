@@ -27,6 +27,9 @@ class AlgoliaClient implements SearchClientInterface
             $data = $this->serializer->serialize($data, 'array');
         }
 
-        $this->searchIndex->saveObject($data);
+        $this->searchIndex->saveObject(
+            $data,
+            ['autoGenerateObjectIDIfNotExist' => true],
+        );
     }
 }
