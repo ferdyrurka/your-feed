@@ -26,6 +26,11 @@ class Category
     #[Assert\NotBlank]
     private string $slug;
 
+    #[ORM\Column(type: 'integer', length: 3, options: ['default' => 0])]
+    #[Assert\GreaterThanOrEqual(0)]
+    #[Assert\LessThanOrEqual(100)]
+    private int $importance;
+
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
@@ -59,6 +64,16 @@ class Category
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    public function getImportance(): int
+    {
+        return $this->importance;
+    }
+
+    public function setImportance(int $importance): void
+    {
+        $this->importance = $importance;
     }
 
     public function __toString(): string
