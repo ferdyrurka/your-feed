@@ -141,34 +141,9 @@ class Post
         return $this->url;
     }
 
-    public function getChecksum(): string
-    {
-        return $this->checksum;
-    }
-
     public function getPublicationAt(): DateTimeImmutable
     {
         return $this->publicationAt;
-    }
-
-    public function getUpdatedAt(): DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function getExternalId(): string
-    {
-        return $this->externalId;
-    }
-
-    public function getCreatedAt(): DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function getSource(): Source
-    {
-        return $this->source;
     }
 
     public function getCategory(): Category
