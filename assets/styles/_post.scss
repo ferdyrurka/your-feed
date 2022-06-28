@@ -5,3 +5,13 @@
   padding: 16px;
   margin-bottom: 16px;
 }
+
+.post-link {
+  text-decoration: none;
+  color: $gray-700;
+  transition: color 0.2s ease-in-out;
+
+  &:hover, &:focus, &:active {
+    color: $gray-900;
+  }
+}

@@ -3,4 +3,10 @@ $primary-border: rgba(194, 206, 214, 0.5);
 
 @import "~bootstrap/scss/bootstrap.scss";
 
+@import "nav";
 @import "post";
+
+body {
+  color: $gray-700;
+  font-size: 14px;
+}

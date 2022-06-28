@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for post in posts %}
-        <div class="post">
-            <h2 class="post__title"><a href="{{ path('client_post', {slug: post.slug}) }}">{{ post.title }}</a></h2>
-            <div class="post__meta">
-                <span>{{ post.category }}</span>
+    {% for post in posts.items %}
+        <a class="post-link" target="_blank" href="{{ path('client_post', {slug: post.slug}) }}">
+            <div class="post">
+                <h2 class="post__title">{{ post.title }}</h2>
+                <div class="post__meta">
+                    <span>{{ post.category }}</span>
+                </div>
+                <p class="post__description">{{ post.description | raw }}</p>
             </div>
-            <p class="post__description">{{ post.description | raw }}</p>
-        </div>
+        </a>
     {% endfor %}
+
+    {% include 'client/home/_pagination.html.twig' with {'paginator': posts} %}
 {% endblock %}

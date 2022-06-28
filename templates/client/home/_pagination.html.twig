@@ -1,0 +1,29 @@
+{% if paginator.pages | length > 1 %}
+    <nav aria-label="post pagination">
+        <ul class="pagination">
+            {% if paginator.hasPreviousPage %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('client_home_page', {page: paginator.getPreviousPage}) }}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page in paginator.pages | slice(paginator.page > 1 ? paginator.page - 2 : paginator.page - 1, 3) %}
+                <li class="page-item {% if paginator.page == page %}active{% endif %}">
+                    <a class="page-link" href="{{ path('client_home_page', {page: page}) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if paginator.hasNextPage %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('client_home_page', {page: paginator.getNextPage}) }}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
