@@ -19,7 +19,7 @@ ci:
 
 .PHONE: consumers
 consumers:
-	symfony console messenger:consume async -vv
+	symfony console messenger:consume async --time-limit=3 --failure-limit=1 -vv
 
 .PHONE: scheduler
 scheduler:

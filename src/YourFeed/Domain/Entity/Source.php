@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ferdyrurka\YourFeed\Domain\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ferdyrurka\YourFeed\Domain\Enum\Period;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -44,6 +45,12 @@ class Source
 
     #[ORM\OneToOne(mappedBy: 'source', targetEntity: Import::class, cascade: ['persist'])]
     private Import $import;
+
+    #[ORM\OneToMany(mappedBy: 'source', targetEntity: Post::class, fetch: 'EXTRA_LAZY')]
+    /**
+     * @var Collection<Post>
+     */
+    private Collection $posts;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updatedAt;
@@ -130,6 +137,14 @@ class Source
     public function setSearchable(bool $searchable): void
     {
         $this->searchable = $searchable;
+    }
+
+    /**
+     * @return Collection<Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
     }
 
     public function __toString(): string

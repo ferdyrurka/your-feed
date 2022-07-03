@@ -2,6 +2,10 @@ $primary-shadow: rgba(194, 206, 214, 0.25);
 $primary-border: rgba(194, 206, 214, 0.5);
 
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~instantsearch.css/themes/reset-min.css";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
 
 @import "nav";
 @import "post";

@@ -6,7 +6,8 @@
             <div class="post">
                 <h2 class="post__title">{{ post.title }}</h2>
                 <div class="post__meta">
-                    <span>{{ post.category }}</span>
+                    <span><i class="fa-solid fa-folder-open"></i> {{ post.category }}</span>
+                    <span><i class="fa-solid fa-clock"></i> {{ post.publicationAt | date('Y-m-d H:i') }}</span>
                 </div>
                 <p class="post__description">{{ post.description | raw }}</p>
             </div>

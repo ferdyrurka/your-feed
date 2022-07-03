@@ -54,7 +54,7 @@ class Post
     #[Assert\Length(max: 255)]
     private string $externalId;
 
-    #[ORM\ManyToOne(targetEntity: Source::class)]
+    #[ORM\ManyToOne(targetEntity: Source::class, inversedBy: 'posts')]
     #[Assert\NotBlank]
     private Source $source;
 
