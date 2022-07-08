@@ -22,9 +22,21 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light navbar-expand-lg bg-light">
             <div class="container">
                 <a class="navbar-brand mb-0 h1" href="/">{% trans %}YourFeed{% endtrans %}</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('client_search') }}">{% trans %}Search{% endtrans %}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

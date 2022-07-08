@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div data-controller="search" data-search-path-value="{{ path('client_post', {slug: '%slug%'}) }}">
-        <div id="searchbox"></div>
+    <div data-controller="search" data-search-path-value="{{ path('client_post', {slug: 'slug'}) }}">
+        <div class="mb-3">
+            <div class="col-lg-6 mb-3">
+                <div id="searchbox"></div>
+            </div>
+
+            <div class="col-6 col-lg-2" id="hits-per-page"></div>
+        </div>
+
         <div id="hits"></div>
         <div id="pagination"></div>
     </div>

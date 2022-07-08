@@ -29,6 +29,7 @@ final class ExportPostCommandHandler implements MessageHandlerInterface
             'objectID' => $post->getUuid(),
             'title' => $post->getTitle(),
             'description' => $post->getDescription(),
+            'category' => $post->getCategory()->getName(),
             'slug' => $post->getSlug(),
             'publicationAt' => $post->getPublicationAt(),
         ]);

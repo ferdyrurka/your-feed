@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const dotenv = require('dotenv');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -31,6 +32,19 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+
+    .configureDefinePlugin(options => {
+        const env = dotenv.config({path: '.env.local'});
+
+        if (env.error) {
+            throw env.error;
+        }
+
+        options['process.env'] = {};
+
+        options['process.env'].ALGOLIA_APP_ID = JSON.stringify(env.parsed.ALGOLIA_APP_ID);
+        options['process.env'].ALGOLIA_API_KEY = JSON.stringify(env.parsed.ALGOLIA_FRONT_API_KEY);
+    })
 
     /*
      * FEATURE CONFIG
