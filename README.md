@@ -1,8 +1,8 @@
 # Your feed
 
-Project currently work in progress.
+Project currently is work in progress.
 
-The small POC to simplify being up-to-date with posts, news etc.
+The small POC to simplify being up-to-date with posts, news etc. and test idea to import data.
 
 ## Information
 
