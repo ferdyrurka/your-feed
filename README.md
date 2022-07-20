@@ -1,4 +1,6 @@
-# RSS reader
+# Your feed
+
+Project currently work in progress.
 
 The small POC to simplify being up-to-date with posts, news etc.
 
